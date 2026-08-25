@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useTournament } from '@/lib/store';
+import { Match } from '@/lib/types';
+import MatchEditModal from './MatchEditModal';
 import {
   Flame,
   Plus,
@@ -12,6 +14,8 @@ import {
   AlertTriangle,
   Ban,
   Zap,
+  Pencil,
+  Trash2,
 } from 'lucide-react';
 
 export default function MobileScoreController() {
@@ -26,11 +30,13 @@ export default function MobileScoreController() {
     setMatchPeriod,
     cancelLiveMatch,
     finishMatch,
+    deleteMatch,
   } = useTournament();
 
   const [confirmFinishOpen, setConfirmFinishOpen] = useState(false);
   const [confirmCancelLiveOpen, setConfirmCancelLiveOpen] = useState(false);
   const [confirmStartAnother, setConfirmStartAnother] = useState<string | null>(null);
+  const [editingMatch, setEditingMatch] = useState<Match | null>(null);
 
   const homeTeam = liveMatch ? teamMap.get(liveMatch.homeTeamId) : null;
   const awayTeam = liveMatch ? teamMap.get(liveMatch.awayTeamId) : null;
@@ -375,9 +381,29 @@ export default function MobileScoreController() {
                       <Clock className="w-3.5 h-3.5" />
                       {m.scheduledAt}
                     </span>
-                    <span className="text-[11px] font-semibold text-slate-400">
-                      {m.groupId === 'group-a' ? 'A ჯგუფი' : m.groupId === 'group-b' ? 'B ჯგუფი' : 'პლეი-ოფი'}
-                    </span>
+                    <div className="flex items-center gap-2">
+                      <span className="text-[11px] font-semibold text-slate-400">
+                        {m.groupId === 'group-a' ? 'A ჯგუფი' : m.groupId === 'group-b' ? 'B ჯგუფი' : 'პლეი-ოფი'}
+                      </span>
+                      <button
+                        onClick={() => setEditingMatch(m)}
+                        className="p-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-amber-400 border border-slate-700 transition-colors"
+                        title="მატჩის რედაქტირება"
+                      >
+                        <Pencil className="w-3.5 h-3.5" />
+                      </button>
+                      <button
+                        onClick={() => {
+                          if (confirm('ნამდვილად გსურთ ამ მატჩის წაშლა / გაუქმება?')) {
+                            deleteMatch(m.id);
+                          }
+                        }}
+                        className="p-1 rounded-lg bg-rose-950/60 hover:bg-rose-900 text-rose-300 border border-rose-800 transition-colors"
+                        title="მატჩის წაშლა / გაუქმება"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
                   </div>
 
                   <div className="space-y-1.5 mb-4">
@@ -390,13 +416,23 @@ export default function MobileScoreController() {
                     </div>
                   </div>
 
-                  <button
-                    onClick={() => handleStartNext(m.id)}
-                    className="w-full py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 active:scale-95 text-white font-extrabold text-xs sm:text-sm shadow-md flex items-center justify-center gap-2 transition-all"
-                  >
-                    <Play className="w-4 h-4 fill-white" />
-                    <span>მატჩის დაწყება (START)</span>
-                  </button>
+                  <div className="grid grid-cols-3 gap-2">
+                    <button
+                      onClick={() => setEditingMatch(m)}
+                      className="py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 active:scale-95 text-slate-200 font-bold text-xs flex items-center justify-center gap-1 border border-slate-700"
+                    >
+                      <Pencil className="w-3.5 h-3.5 text-amber-400" />
+                      <span>შეცვლა</span>
+                    </button>
+
+                    <button
+                      onClick={() => handleStartNext(m.id)}
+                      className="col-span-2 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 active:scale-95 text-white font-extrabold text-xs shadow-md flex items-center justify-center gap-1.5 transition-all"
+                    >
+                      <Play className="w-3.5 h-3.5 fill-white" />
+                      <span>დაწყება (START)</span>
+                    </button>
+                  </div>
                 </div>
               );
             })}
@@ -562,6 +598,11 @@ export default function MobileScoreController() {
             </div>
           </div>
         </div>
+      )}
+
+      {/* Edit Match Modal */}
+      {editingMatch && (
+        <MatchEditModal match={editingMatch} onClose={() => setEditingMatch(null)} />
       )}
     </div>
   );
