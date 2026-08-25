@@ -405,42 +405,96 @@ export default function MobileScoreController() {
       </div>
 
       {/* Confirmation Dialog: FINISH MATCH */}
-      {confirmFinishOpen && liveMatch && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="w-full max-w-md p-6 rounded-3xl bg-slate-900 border border-slate-700 shadow-2xl space-y-4">
-            <div className="flex items-center gap-3 text-amber-400">
-              <AlertTriangle className="w-7 h-7 shrink-0" />
-              <h3 className="text-lg font-black text-white">მატჩის დასრულების დადასტურება</h3>
-            </div>
+      {confirmFinishOpen && liveMatch && (() => {
+        const hScore = liveMatch.homeScore;
+        const aScore = liveMatch.awayScore;
+        const hPen = liveMatch.homePenaltyScore;
+        const aPen = liveMatch.awayPenaltyScore;
+        const hasPen = hPen !== undefined && aPen !== undefined;
 
-            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-              ნამდვილად გსურთ მატჩის დასრულება ანგარიშით{' '}
-              <strong className="text-white font-mono text-base">
-                {homeTeam?.name} ({liveMatch.homeScore}) : ({liveMatch.awayScore}) {awayTeam?.name}
-              </strong>
-              ? შედეგი გახდება ოფიციალური და სატურნირო ცხრილები გადაითვლება.
-            </p>
+        let winnerTeam = null;
+        if (hScore > aScore) {
+          winnerTeam = homeTeam;
+        } else if (aScore > hScore) {
+          winnerTeam = awayTeam;
+        } else if (hasPen && hPen !== undefined && aPen !== undefined) {
+          if (hPen > aPen) winnerTeam = homeTeam;
+          else if (aPen > hPen) winnerTeam = awayTeam;
+        }
 
-            <div className="grid grid-cols-2 gap-3 pt-2">
-              <button
-                onClick={() => setConfirmFinishOpen(false)}
-                className="py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-xs"
-              >
-                გაუქმება
-              </button>
-              <button
-                onClick={() => {
-                  finishMatch(liveMatch.id);
-                  setConfirmFinishOpen(false);
-                }}
-                className="py-3 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-black text-xs shadow-lg shadow-rose-950/60"
-              >
-                დიახ, დასრულება
-              </button>
+        const isGroupRound = liveMatch.roundType === 'group';
+
+        return (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
+            <div className="w-full max-w-md p-6 rounded-3xl bg-slate-900 border border-slate-700 shadow-2xl space-y-4">
+              <div className="flex items-center gap-3 text-amber-400">
+                <AlertTriangle className="w-7 h-7 shrink-0" />
+                <h3 className="text-lg font-black text-white">მატჩის დასრულების დადასტურება</h3>
+              </div>
+
+              <div className="space-y-3 bg-slate-950/80 p-4 rounded-2xl border border-slate-800 text-center">
+                <div className="text-xs font-semibold text-slate-400">ძირითადი ანგარიში</div>
+                <div className="flex items-center justify-center gap-3 text-base sm:text-lg font-black text-white">
+                  <span>{homeTeam?.name}</span>
+                  <span className="font-mono text-2xl text-rose-400 px-2 py-0.5 rounded bg-slate-900 border border-rose-500/30">
+                    {hScore} : {aScore}
+                  </span>
+                  <span>{awayTeam?.name}</span>
+                </div>
+
+                {hasPen && (
+                  <div className="pt-2 border-t border-slate-800">
+                    <div className="text-xs font-bold text-amber-400 mb-1 flex items-center justify-center gap-1">
+                      <span>⚽ პენალტების სერიის ანგარიში</span>
+                    </div>
+                    <div className="font-mono text-xl font-black text-amber-300">
+                      ({hPen}) : ({aPen})
+                    </div>
+                  </div>
+                )}
+
+                {/* Winner Declaration */}
+                {winnerTeam ? (
+                  <div className="pt-3 border-t border-slate-800">
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-950/90 border border-emerald-500/50 text-emerald-300 font-extrabold text-sm shadow-md">
+                      <span>🏆 გამარჯვებული:</span>
+                      <span className="text-white font-black text-base">{winnerTeam.name}</span>
+                    </div>
+                  </div>
+                ) : hScore === aScore && !hasPen ? (
+                  <div className="pt-2 text-xs font-bold text-rose-400">
+                    ⚠️ ანგარიში თანაბარია. პენალტების სერიის ჩასატარებლად გამოიყენეთ „⚽ პენალტები“ ღილაკი.
+                  </div>
+                ) : null}
+              </div>
+
+              <p className="text-xs text-slate-400 leading-relaxed text-center">
+                {isGroupRound
+                  ? 'შედეგი გახდება ოფიციალური და ჯგუფური ცხრილი გადაითვლება.'
+                  : 'შედეგი გახდება ოფიციალური და გამარჯვებული გუნდი ავტომატურად გადავა შემდეგ ეტაპზე.'}
+              </p>
+
+              <div className="grid grid-cols-2 gap-3 pt-2">
+                <button
+                  onClick={() => setConfirmFinishOpen(false)}
+                  className="py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-xs"
+                >
+                  გაუქმება
+                </button>
+                <button
+                  onClick={() => {
+                    finishMatch(liveMatch.id);
+                    setConfirmFinishOpen(false);
+                  }}
+                  className="py-3 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-black text-xs shadow-lg shadow-rose-950/60"
+                >
+                  დიახ, დასრულება
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        );
+      })()}
 
       {/* Confirmation Dialog: CANCEL LIVE / RESET MATCH */}
       {confirmCancelLiveOpen && liveMatch && (
