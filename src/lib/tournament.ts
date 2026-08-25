@@ -1,4 +1,5 @@
 import { Team, Match, StandingsRow, Tournament, KnockoutMatchView, RoundType } from './types';
+import { INITIAL_TOURNAMENT } from './initialData';
 
 /**
  * Calculates group standings dynamically from match results.
@@ -146,6 +147,29 @@ export function getQualifiedTeams(standings: StandingsRow[]): Team[] {
   return standings.filter((s) => s.isQualified).map((s) => s.team);
 }
 
+export function getWinnerTeamId(match?: Match): string | undefined {
+  if (!match || match.status !== 'finished') return undefined;
+  if (match.homeScore > match.awayScore) return match.homeTeamId;
+  if (match.awayScore > match.homeScore) return match.awayTeamId;
+  // Penalty shootout fallback if scores are equal
+  if (match.homePenaltyScore !== undefined && match.awayPenaltyScore !== undefined) {
+    if (match.homePenaltyScore > match.awayPenaltyScore) return match.homeTeamId;
+    if (match.awayPenaltyScore > match.homePenaltyScore) return match.awayTeamId;
+  }
+  return undefined;
+}
+
+export function getLoserTeamId(match?: Match): string | undefined {
+  if (!match || match.status !== 'finished') return undefined;
+  if (match.homeScore > match.awayScore) return match.awayTeamId;
+  if (match.awayScore > match.homeScore) return match.homeTeamId;
+  if (match.homePenaltyScore !== undefined && match.awayPenaltyScore !== undefined) {
+    if (match.homePenaltyScore > match.awayPenaltyScore) return match.awayTeamId;
+    if (match.awayPenaltyScore > match.homePenaltyScore) return match.homeTeamId;
+  }
+  return undefined;
+}
+
 /**
  * Builds the dynamic playoff bracket tree and match views according to tournament rules:
  * QF1: A1 vs B4
@@ -176,29 +200,6 @@ export function getKnockoutBracketView(
   // Helper to find existing match by bracketPosition
   const findMatch = (bracketPos: string) =>
     allMatches.find((m) => m.bracketPosition === bracketPos);
-
-  const getWinnerTeamId = (match?: Match): string | undefined => {
-    if (!match || match.status !== 'finished') return undefined;
-    if (match.homeScore > match.awayScore) return match.homeTeamId;
-    if (match.awayScore > match.homeScore) return match.awayTeamId;
-    // Penalty shootout fallback if scores are equal
-    if (match.homePenaltyScore !== undefined && match.awayPenaltyScore !== undefined) {
-      if (match.homePenaltyScore > match.awayPenaltyScore) return match.homeTeamId;
-      if (match.awayPenaltyScore > match.homePenaltyScore) return match.awayTeamId;
-    }
-    return undefined;
-  };
-
-  const getLoserTeamId = (match?: Match): string | undefined => {
-    if (!match || match.status !== 'finished') return undefined;
-    if (match.homeScore > match.awayScore) return match.awayTeamId;
-    if (match.awayScore > match.homeScore) return match.homeTeamId;
-    if (match.homePenaltyScore !== undefined && match.awayPenaltyScore !== undefined) {
-      if (match.homePenaltyScore > match.awayPenaltyScore) return match.awayTeamId;
-      if (match.awayPenaltyScore > match.homePenaltyScore) return match.homeTeamId;
-    }
-    return undefined;
-  };
 
   // Check if all group stage matches have finished
   const groupMatches = allMatches.filter((m) => m.roundType === 'group');
@@ -468,4 +469,78 @@ export function finishMatch(match: Match): Match {
     matchPeriod: undefined,
     finishedAt: new Date().toISOString(),
   };
+}
+
+/**
+ * Automatically creates or updates Knockout match objects (SF1, SF2, FINAL, THIRD_PLACE)
+ * in the matches array based on finished Quarter Final and Semi Final winners/losers.
+ */
+export function autoPropagateKnockoutWinners(
+  matches: Match[],
+  teams: Team[]
+): Match[] {
+  const groupAStandings = calculateStandings('group-a', teams, matches, INITIAL_TOURNAMENT);
+  const groupBStandings = calculateStandings('group-b', teams, matches, INITIAL_TOURNAMENT);
+  const bracketView = getKnockoutBracketView(groupAStandings, groupBStandings, matches, teams);
+
+  const updatedMatches = [...matches];
+
+  const upsertMatch = (
+    id: string,
+    bracketPosition: string,
+    roundType: RoundType,
+    homeTeamId?: string,
+    awayTeamId?: string
+  ) => {
+    const idx = updatedMatches.findIndex(
+      (m) => m.id === id || m.bracketPosition === bracketPosition
+    );
+    if (idx >= 0) {
+      const existing = updatedMatches[idx];
+      const newHome = homeTeamId || existing.homeTeamId;
+      const newAway = awayTeamId || existing.awayTeamId;
+      if (existing.homeTeamId !== newHome || existing.awayTeamId !== newAway) {
+        updatedMatches[idx] = {
+          ...existing,
+          homeTeamId: newHome || '',
+          awayTeamId: newAway || '',
+        };
+      }
+    } else if (homeTeamId || awayTeamId) {
+      updatedMatches.push({
+        id,
+        tournamentId: 'tourn-shilda-2026',
+        bracketPosition,
+        roundType,
+        homeTeamId: homeTeamId || '',
+        awayTeamId: awayTeamId || '',
+        scheduledAt: 'TBD',
+        status: 'scheduled',
+        homeScore: 0,
+        awayScore: 0,
+      });
+    }
+  };
+
+  // SF1: QF1 winner vs QF2 winner
+  const sf1HomeId = bracketView.quarterFinals[0]?.winnerTeamId;
+  const sf1AwayId = bracketView.quarterFinals[1]?.winnerTeamId;
+  upsertMatch('m-sf-1', 'SF1', 'semi_final', sf1HomeId, sf1AwayId);
+
+  // SF2: QF3 winner vs QF4 winner
+  const sf2HomeId = bracketView.quarterFinals[2]?.winnerTeamId;
+  const sf2AwayId = bracketView.quarterFinals[3]?.winnerTeamId;
+  upsertMatch('m-sf-2', 'SF2', 'semi_final', sf2HomeId, sf2AwayId);
+
+  // FINAL: SF1 winner vs SF2 winner
+  const finalHomeId = bracketView.semiFinals[0]?.winnerTeamId;
+  const finalAwayId = bracketView.semiFinals[1]?.winnerTeamId;
+  upsertMatch('m-final', 'FINAL', 'final', finalHomeId, finalAwayId);
+
+  // THIRD PLACE: SF1 loser vs SF2 loser
+  const thirdHomeId = getLoserTeamId(bracketView.semiFinals[0]?.match);
+  const thirdAwayId = getLoserTeamId(bracketView.semiFinals[1]?.match);
+  upsertMatch('m-third', 'THIRD_PLACE', 'third_place', thirdHomeId, thirdAwayId);
+
+  return updatedMatches;
 }

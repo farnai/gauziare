@@ -14,6 +14,7 @@ import {
   startMatch as startMatchFn,
   setMatchPeriod as setMatchPeriodFn,
   finishMatch as finishMatchFn,
+  autoPropagateKnockoutWinners,
 } from './tournament';
 import { supabase, isSupabaseConfigured } from './supabase';
 
@@ -235,37 +236,43 @@ export const TournamentProvider: React.FC<{ children: React.ReactNode }> = ({ ch
   }, []);
 
   // Sync matches state to storage, cloud server API, and broadcast channel
-  const persistMatches = useCallback((newMatches: Match[]) => {
-    const now = Date.now();
-    lastLocalMutationRef.current = now;
-    setMatches(newMatches);
+  const persistMatches = useCallback(
+    (newMatches: Match[]) => {
+      const propagated = autoPropagateKnockoutWinners(newMatches, teams);
+      const now = Date.now();
+      lastLocalMutationRef.current = now;
+      setMatches(propagated);
 
-    if (typeof window !== 'undefined') {
-      localStorage.setItem(STORAGE_KEY_MATCHES, JSON.stringify(newMatches));
-      localStorage.setItem('gauziare_last_updated', String(now));
+      if (typeof window !== 'undefined') {
+        localStorage.setItem(STORAGE_KEY_MATCHES, JSON.stringify(propagated));
+        localStorage.setItem('gauziare_last_updated', String(now));
 
-      if ('BroadcastChannel' in window) {
-        const channel = new BroadcastChannel(BROADCAST_CHANNEL_NAME);
-        channel.postMessage({ type: 'MATCHES_UPDATED', payload: newMatches });
-        channel.close();
+        if ('BroadcastChannel' in window) {
+          const channel = new BroadcastChannel(BROADCAST_CHANNEL_NAME);
+          channel.postMessage({ type: 'MATCHES_UPDATED', payload: propagated });
+          channel.close();
+        }
       }
-    }
 
-    // Immediately push update to persistent server API so all clients receive it
-    fetch('/api/tournament.php', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ matches: newMatches, lastUpdated: now }),
-    }).catch(() => {
-      return fetch('/api/tournament', {
+      // Immediately push update to persistent server API so all clients receive it
+      fetch('/api/tournament.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ matches: newMatches, lastUpdated: now }),
-      });
-    }).catch((err) => {
-      console.error('Failed to sync to server API:', err);
-    });
-  }, []);
+        body: JSON.stringify({ matches: propagated, lastUpdated: now }),
+      })
+        .catch(() => {
+          return fetch('/api/tournament', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ matches: propagated, lastUpdated: now }),
+          });
+        })
+        .catch((err) => {
+          console.error('Failed to sync to server API:', err);
+        });
+    },
+    [teams]
+  );
 
   // Admin Auth Handlers
   const loginAdmin = useCallback(
