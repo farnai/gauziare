@@ -49,6 +49,7 @@ export default function StandingsTable() {
                 const diff = row.goalDifference;
                 const isLivePlaying =
                   liveMatch &&
+                  liveMatch.roundType === 'group' &&
                   (liveMatch.homeTeamId === row.team.id || liveMatch.awayTeamId === row.team.id);
 
                 return (

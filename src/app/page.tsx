@@ -29,11 +29,11 @@ export default function HomePage() {
       {/* 5. Recent Match Results */}
       <RecentResults />
 
-      {/* 6. Group Standings Tables */}
-      <StandingsTable />
-
-      {/* 7. Knockout Bracket */}
+      {/* 6. Knockout Playoff Bracket */}
       <KnockoutBracket />
+
+      {/* 7. Group Standings Tables */}
+      <StandingsTable />
 
       {/* 8. Charity & Donation Section */}
       <CharitySection />
