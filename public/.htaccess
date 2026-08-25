@@ -1,0 +1,47 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Exclude SSL Certificate Validation (DCV) from redirects
+    RewriteRule ^\.well-known/ - [L]
+    RewriteCond %{REQUEST_URI} ^/\.well-known/ [NC]
+    RewriteRule .* - [L]
+
+    # Force HTTPS (excluding .well-known)
+    RewriteCond %{HTTPS} off
+    RewriteCond %{REQUEST_URI} !^/\.well-known/
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    # Redirect trailing slash for folders or clean routes
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME}/index.html -f
+    RewriteRule ^(.*)$ $1/index.html [L]
+
+    # Clean fallback for single page application routes
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} !^/\.well-known/
+    RewriteRule ^(.*)$ index.html [L]
+</IfModule>
+
+# Enable GZIP compression
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+</IfModule>
+
+# Security & HTTPS Headers
+<IfModule mod_headers.c>
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+    Header always set Content-Security-Policy "upgrade-insecure-requests"
+</IfModule>
+
+# Caching for static assets
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css "access plus 1 year"
+    ExpiresByType application/javascript "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType application/json "access plus 0 seconds"
+</IfModule>
