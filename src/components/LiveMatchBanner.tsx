@@ -33,7 +33,11 @@ export default function LiveMatchBanner() {
               </span>
 
               {/* Match Period Status Badge */}
-              {liveMatch.matchPeriod === 'half_time' ? (
+              {liveMatch.matchPeriod === 'penalties' ? (
+                <span className="px-3 py-1 rounded-full bg-amber-500 text-slate-950 text-xs font-extrabold shadow-md flex items-center gap-1.5 animate-pulse">
+                  <span>⚽ პენალტების სერია</span>
+                </span>
+              ) : liveMatch.matchPeriod === 'half_time' ? (
                 <span className="px-3 py-1 rounded-full bg-amber-500 text-slate-950 text-xs font-extrabold shadow-md flex items-center gap-1.5">
                   <span>⏸ შესვენება (I ტაიმი დასრულდა)</span>
                 </span>
@@ -88,9 +92,16 @@ export default function LiveMatchBanner() {
                     {liveMatch.awayScore}
                   </span>
                 </div>
-                <span className="mt-2 text-xs font-extrabold uppercase text-rose-400/90 tracking-widest animate-pulse">
-                  პირდაპირი ეთერი
-                </span>
+
+                {liveMatch.homePenaltyScore !== undefined && liveMatch.awayPenaltyScore !== undefined ? (
+                  <div className="mt-2 px-3 py-1 rounded-xl bg-amber-950/80 border border-amber-500/40 text-amber-300 font-mono text-xs font-black">
+                    ⚽ პენალტები: {liveMatch.homePenaltyScore} - {liveMatch.awayPenaltyScore}
+                  </div>
+                ) : (
+                  <span className="mt-2 text-xs font-extrabold uppercase text-rose-400/90 tracking-widest animate-pulse">
+                    პირდაპირი ეთერი
+                  </span>
+                )}
               </div>
 
               {/* Away Team */}

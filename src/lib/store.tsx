@@ -1,7 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useEffect, useState, useMemo, useCallback, useRef } from 'react';
-import { Match, Team, Group, Tournament, StandingsRow, KnockoutMatchView } from './types';
+import { Match, Team, Group, Tournament, StandingsRow, KnockoutMatchView, MatchStatus } from './types';
 import {
   INITIAL_TOURNAMENT,
   INITIAL_GROUPS,
@@ -56,7 +56,9 @@ interface TournamentContextType {
   updateScore: (matchId: string, deltaHome: number, deltaAway: number) => void;
   undoScore: (matchId: string) => void;
   startMatch: (matchId: string, period?: '1st_half' | '2nd_half') => void;
-  setMatchPeriod: (matchId: string, period: '1st_half' | 'half_time' | '2nd_half') => void;
+  setMatchPeriod: (matchId: string, period: '1st_half' | 'half_time' | '2nd_half' | 'penalties') => void;
+  updatePenaltyScore: (matchId: string, deltaHome: number, deltaAway: number) => void;
+  cancelLiveMatch: (matchId: string) => void;
   finishMatch: (matchId: string) => void;
   updateMatchDetails: (match: Partial<Match> & { id: string }) => void;
   createMatch: (match: Omit<Match, 'id'>) => void;
@@ -371,16 +373,82 @@ export const TournamentProvider: React.FC<{ children: React.ReactNode }> = ({ ch
     [persistMatches, addToast]
   );
 
-  // Set Match Period (1st Half, Half Time / Break, 2nd Half)
+  // Set Match Period (1st Half, Half Time / Break, 2nd Half, Penalties)
   const setMatchPeriod = useCallback(
-    (matchId: string, period: '1st_half' | 'half_time' | '2nd_half') => {
+    (matchId: string, period: '1st_half' | 'half_time' | '2nd_half' | 'penalties') => {
       setMatches((prev) => {
-        const nextMatches = prev.map((m) => (m.id === matchId ? setMatchPeriodFn(m, period) : m));
+        const nextMatches = prev.map((m) => {
+          if (m.id !== matchId) return m;
+          const updated = setMatchPeriodFn(m, period as any);
+          return {
+            ...updated,
+            matchPeriod: period,
+            hasPenalties: period === 'penalties' ? true : m.hasPenalties,
+          };
+        });
         persistMatches(nextMatches);
         return nextMatches;
       });
-      const label = period === '1st_half' ? 'I ტაიმი' : period === 'half_time' ? 'შესვენება (ტაიმი დასრულდა)' : 'II ტაიმი';
+      const label =
+        period === '1st_half'
+          ? 'I ტაიმი'
+          : period === 'half_time'
+          ? 'შესვენება (ტაიმი დასრულდა)'
+          : period === '2nd_half'
+          ? 'II ტაიმი'
+          : '⚽ პენალტების სერია';
       addToast('info', `პერიოდი: ${label}`);
+    },
+    [persistMatches, addToast]
+  );
+
+  // Update Penalty Score (+1 / -1)
+  const updatePenaltyScore = useCallback(
+    (matchId: string, deltaHome: number, deltaAway: number) => {
+      setMatches((prev) => {
+        const nextMatches = prev.map((m) => {
+          if (m.id !== matchId) return m;
+          const currentHomePen = m.homePenaltyScore ?? 0;
+          const currentAwayPen = m.awayPenaltyScore ?? 0;
+          const newHomePen = Math.max(0, currentHomePen + deltaHome);
+          const newAwayPen = Math.max(0, currentAwayPen + deltaAway);
+          return {
+            ...m,
+            hasPenalties: true,
+            homePenaltyScore: newHomePen,
+            awayPenaltyScore: newAwayPen,
+          };
+        });
+        persistMatches(nextMatches);
+        return nextMatches;
+      });
+    },
+    [persistMatches]
+  );
+
+  // Cancel Live Status & Reset Match to Scheduled
+  const cancelLiveMatch = useCallback(
+    (matchId: string) => {
+      setMatches((prev) => {
+        const nextMatches = prev.map((m) => {
+          if (m.id !== matchId) return m;
+          return {
+            ...m,
+            status: 'scheduled' as MatchStatus,
+            homeScore: 0,
+            awayScore: 0,
+            homePenaltyScore: undefined,
+            awayPenaltyScore: undefined,
+            hasPenalties: false,
+            matchPeriod: '1st_half' as const,
+            startedAt: undefined,
+            finishedAt: undefined,
+          };
+        });
+        persistMatches(nextMatches);
+        return nextMatches;
+      });
+      addToast('warning', 'LIVE გაუქმდა', 'მატჩი დაუბრუნდა დაგეგმილ მდგომარეობას (0 - 0)');
     },
     [persistMatches, addToast]
   );
@@ -504,6 +572,8 @@ export const TournamentProvider: React.FC<{ children: React.ReactNode }> = ({ ch
         undoScore,
         startMatch,
         setMatchPeriod,
+        updatePenaltyScore,
+        cancelLiveMatch,
         finishMatch,
         updateMatchDetails,
         createMatch,

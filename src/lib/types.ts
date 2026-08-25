@@ -61,7 +61,7 @@ export interface Match {
   roundOrder?: number;
   bracketPosition?: string; // e.g. "QF1", "QF2", "SF1", "FINAL"
   matchDay?: number;
-  matchPeriod?: '1st_half' | 'half_time' | '2nd_half';
+  matchPeriod?: '1st_half' | 'half_time' | '2nd_half' | 'penalties';
   notes?: string;
 }
 
