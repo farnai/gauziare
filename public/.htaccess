@@ -7,13 +7,20 @@
     RewriteCond %{REQUEST_URI} ^/\.well-known/ [NC]
     RewriteRule .* - [L]
 
-    # Force HTTPS (excluding .well-known)
+    # CRITICAL: Never rewrite _next/static assets - serve them directly
+    RewriteRule ^_next/ - [L]
+    RewriteCond %{REQUEST_URI} ^/_next/ [NC]
+    RewriteRule .* - [L]
+
+    # Force HTTPS (excluding .well-known and _next)
     RewriteCond %{HTTPS} off
     RewriteCond %{REQUEST_URI} !^/\.well-known/
+    RewriteCond %{REQUEST_URI} !^/_next/
     RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
     # Redirect trailing slash for folders or clean routes
     RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_URI} !^/_next/
     RewriteCond %{REQUEST_FILENAME}/index.html -f
     RewriteRule ^(.*)$ $1/index.html [L]
 
@@ -21,6 +28,7 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_URI} !^/\.well-known/
+    RewriteCond %{REQUEST_URI} !^/_next/
     RewriteRule ^(.*)$ index.html [L]
 </IfModule>
 
@@ -38,10 +46,20 @@
 # Caching for static assets
 <IfModule mod_expires.c>
     ExpiresActive On
+    ExpiresByType text/html "access plus 0 seconds"
     ExpiresByType text/css "access plus 1 year"
     ExpiresByType application/javascript "access plus 1 year"
     ExpiresByType image/webp "access plus 1 year"
     ExpiresByType image/png "access plus 1 year"
     ExpiresByType image/svg+xml "access plus 1 year"
     ExpiresByType application/json "access plus 0 seconds"
+</IfModule>
+
+# Force browsers to fetch fresh HTML files on every page load
+<IfModule mod_headers.c>
+    <FilesMatch "\.(html|htm)$">
+        Header set Cache-Control "no-cache, no-store, must-revalidate"
+        Header set Pragma "no-cache"
+        Header set Expires "0"
+    </FilesMatch>
 </IfModule>

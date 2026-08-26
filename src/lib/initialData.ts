@@ -596,12 +596,13 @@ export const INITIAL_MATCHES: Match[] = [
   },
 
   // --- QUARTER FINALS (1/4 ფინალი) ---
+  // A1vsB4, A3vsB2 → SF1 | B1vsA4, B3vsA2 → SF2
   {
     id: 'm-qf-1',
     tournamentId: 'tourn-shilda-2026',
     bracketPosition: 'QF1',
-    homeTeamId: 'team-shilda',
-    awayTeamId: 'team-tsnori',
+    homeTeamId: 'team-shilda',     // A1
+    awayTeamId: 'team-tsnori',    // B4
     scheduledAt: 'TBD',
     status: 'scheduled',
     homeScore: 0,
@@ -612,8 +613,8 @@ export const INITIAL_MATCHES: Match[] = [
     id: 'm-qf-2',
     tournamentId: 'tourn-shilda-2026',
     bracketPosition: 'QF2',
-    homeTeamId: 'team-telavi',
-    awayTeamId: 'team-shilda-2',
+    homeTeamId: 'team-kakhelebi', // A3
+    awayTeamId: 'team-gavazi',   // B2
     scheduledAt: 'TBD',
     status: 'scheduled',
     homeScore: 0,
@@ -624,8 +625,8 @@ export const INITIAL_MATCHES: Match[] = [
     id: 'm-qf-3',
     tournamentId: 'tourn-shilda-2026',
     bracketPosition: 'QF3',
-    homeTeamId: 'team-kakhelebi',
-    awayTeamId: 'team-gavazi',
+    homeTeamId: 'team-kalauri',  // B1
+    awayTeamId: 'team-gremi',   // A4
     scheduledAt: 'TBD',
     status: 'scheduled',
     homeScore: 0,
@@ -636,8 +637,8 @@ export const INITIAL_MATCHES: Match[] = [
     id: 'm-qf-4',
     tournamentId: 'tourn-shilda-2026',
     bracketPosition: 'QF4',
-    homeTeamId: 'team-gremi',
-    awayTeamId: 'team-kalauri',
+    homeTeamId: 'team-shilda-2', // B3
+    awayTeamId: 'team-telavi',  // A2
     scheduledAt: 'TBD',
     status: 'scheduled',
     homeScore: 0,
