@@ -15,15 +15,20 @@ export default function TournamentTimeline() {
     (m) => (m.roundType === 'semi_final' || m.roundType === 'final') && (m.status === 'live' || m.status === 'finished')
   );
 
-  const hasFinalStarted = matches.some(
-    (m) => m.roundType === 'final' && (m.status === 'live' || m.status === 'finished')
+  const isThirdPlaceFinished = matches.some(
+    (m) => m.roundType === 'third_place' && m.status === 'finished'
+  );
+
+  const isFinalFinished = matches.some(
+    (m) => m.roundType === 'final' && m.status === 'finished'
   );
 
   const stages = [
-    { name: 'ჯგუფური ეტაპი', active: true, completed: hasKnockoutStarted },
-    { name: '1/4 ფინალი', active: hasKnockoutStarted, completed: hasSemifinalsStarted },
-    { name: '1/2 ფინალი', active: hasSemifinalsStarted, completed: hasFinalStarted },
-    { name: 'ფინალი & III ადგილი', active: hasFinalStarted, completed: false },
+    { name: 'ჯგუფური ეტაპი', active: false, completed: true },
+    { name: '1/4 ფინალი', active: false, completed: true },
+    { name: '1/2 ფინალი', active: false, completed: true },
+    { name: 'III ადგილი (0:4)', active: false, completed: isThirdPlaceFinished },
+    { name: 'დიდი ფინალი (5 სექტ.)', active: !isFinalFinished, completed: isFinalFinished },
   ];
 
   return (

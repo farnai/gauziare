@@ -20,7 +20,8 @@ export default function TodaysMatches() {
       const sfNum = m.bracketPosition ? m.bracketPosition.replace('SF', '#') : '';
       return `1/2 ფინალი ${sfNum}`;
     }
-    if (m.roundType === 'final') return '🏆 ფინალი';
+    if (m.roundType === 'friendly') return '⚽ ამხანაგური მატჩი';
+    if (m.roundType === 'final') return '🏆 დიდი ფინალი';
     if (m.roundType === 'third_place') return '🥉 III ადგილი';
     if (m.groupId === 'group-a') return 'A ჯგუფი';
     if (m.groupId === 'group-b') return 'B ჯგუფი';
@@ -34,11 +35,11 @@ export default function TodaysMatches() {
       <div className="flex items-center justify-between mb-6">
         <div>
           <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight flex items-center gap-2.5">
-            <span className="w-3 h-3 rounded-full bg-emerald-500" />
-            პლეი-ოფის განრიგი
+            <span className="w-3 h-3 rounded-full bg-emerald-500 animate-pulse" />
+            საფინალო საღამოს განრიგი
           </h2>
           <p className="text-xs sm:text-sm text-slate-400 mt-0.5">
-            განრიგი და მიმდინარე თამაშები (1/4 ფინალი)
+            შაბათი, 5 სექტემბერი • საფინალო საღამოს მატჩები შილდის სტადიონზე
           </p>
         </div>
 

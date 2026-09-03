@@ -1,5 +1,5 @@
 export type MatchStatus = 'scheduled' | 'live' | 'finished' | 'postponed' | 'cancelled';
-export type RoundType = 'group' | 'quarter_final' | 'semi_final' | 'final' | 'third_place';
+export type RoundType = 'group' | 'quarter_final' | 'semi_final' | 'final' | 'third_place' | 'friendly';
 
 export interface Tournament {
   id: string;

@@ -1,4 +1,5 @@
 import Hero from '@/components/Hero';
+import FinalNightBanner from '@/components/FinalNightBanner';
 import LiveMatchBanner from '@/components/LiveMatchBanner';
 import TournamentTimeline from '@/components/TournamentTimeline';
 import TodaysMatches from '@/components/TodaysMatches';
@@ -19,6 +20,9 @@ export default function HomePage() {
 
       {/* 2. LIVE Scoreboard Banner */}
       <LiveMatchBanner />
+
+      {/* 3. Final Night Grand Announcement & Schedule */}
+      <FinalNightBanner />
 
       {/* 3. Tournament Progress Timeline */}
       <TournamentTimeline />

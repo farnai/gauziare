@@ -6,21 +6,16 @@ import { useTournament } from '@/lib/store';
 import { Flame, Clock, Calendar, Shield, ArrowRight } from 'lucide-react';
 
 export default function LiveMatchBanner() {
-  const { liveMatch, upcomingMatches, teamMap } = useTournament();
+  const { liveMatch, teamMap } = useTournament();
 
-  const nextMatch = upcomingMatches[0];
+  if (!liveMatch) return null;
 
-  const homeTeamLive = liveMatch ? teamMap.get(liveMatch.homeTeamId) : null;
-  const awayTeamLive = liveMatch ? teamMap.get(liveMatch.awayTeamId) : null;
-
-  const nextHomeTeam = nextMatch ? teamMap.get(nextMatch.homeTeamId) : null;
-  const nextAwayTeam = nextMatch ? teamMap.get(nextMatch.awayTeamId) : null;
+  const homeTeamLive = teamMap.get(liveMatch.homeTeamId);
+  const awayTeamLive = teamMap.get(liveMatch.awayTeamId);
 
   return (
     <section id="live-section" className="scroll-mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-      {liveMatch ? (
-        // LIVE MATCH ACTIVE
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-rose-950/80 via-slate-900/95 to-red-950/70 border-2 border-rose-600/60 shadow-2xl shadow-rose-950/60 backdrop-blur-xl">
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-rose-950/80 via-slate-900/95 to-red-950/70 border-2 border-rose-600/60 shadow-2xl shadow-rose-950/60 backdrop-blur-xl">
           {/* Animated red ambient blur */}
           <div className="absolute top-0 right-1/4 w-96 h-96 bg-rose-600/20 rounded-full blur-3xl pointer-events-none" />
 
@@ -124,53 +119,9 @@ export default function LiveMatchBanner() {
                 <span>მატჩის დეტალური გვერდი</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
-            </div>
           </div>
         </div>
-      ) : (
-        // NO LIVE MATCH (UPCOMING SPOTLIGHT)
-        <div className="rounded-3xl glass-panel border border-slate-800 p-5 sm:p-7 relative overflow-hidden">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-3.5 text-left">
-              <div className="w-12 h-12 rounded-2xl bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-400 shrink-0">
-                <Calendar className="w-6 h-6 text-emerald-400" />
-              </div>
-              <div>
-                <div className="flex items-center gap-2">
-                  <span className="text-xs font-semibold text-slate-400">სტატუსი</span>
-                  <span className="h-1.5 w-1.5 rounded-full bg-slate-500" />
-                  <span className="text-xs font-medium text-slate-300">
-                    ამჟამად LIVE მატჩი არ მიმდინარეობს
-                  </span>
-                </div>
-                <div className="text-base sm:text-lg font-bold text-white mt-0.5">
-                  {nextMatch ? (
-                    <span className="flex items-center gap-2 flex-wrap">
-                      <span className="text-emerald-400 font-extrabold">{nextMatch.scheduledAt}</span>
-                      <span>—</span>
-                      <span className="text-slate-100">{nextHomeTeam?.name}</span>
-                      <span className="text-slate-400 text-sm font-semibold">vs</span>
-                      <span className="text-slate-100">{nextAwayTeam?.name}</span>
-                    </span>
-                  ) : (
-                    'ყველა დაგეგმილი მატჩი დასრულებულია'
-                  )}
-                </div>
-              </div>
-            </div>
-
-            {nextMatch && (
-              <Link
-                href={`/match/${nextMatch.id}`}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs sm:text-sm font-bold text-slate-200 hover:text-white transition-colors"
-              >
-                <span>მომდევნო მატჩი</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            )}
-          </div>
-        </div>
-      )}
+      </div>
     </section>
   );
 }

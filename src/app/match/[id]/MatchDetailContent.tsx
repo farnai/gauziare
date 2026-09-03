@@ -88,7 +88,17 @@ export default function MatchDetailContent({ id }: { id?: string }) {
         {/* Match Stage & Badge */}
         <div className="flex items-center justify-center gap-2 mb-6 flex-wrap">
           <span className="text-xs font-bold text-slate-400 bg-slate-900/80 border border-slate-800 px-3 py-1 rounded-full uppercase tracking-wider">
-            {match.matchDay ? `ტური ${match.matchDay}` : 'ფლეი-ოფი'} • {match.groupId ? (match.groupId === 'group-a' ? 'A ჯგუფი' : 'B ჯგუფი') : 'პლეიოფი'}
+            {match.roundType === 'friendly'
+              ? '⚽ ამხანაგური მატჩი'
+              : match.roundType === 'final'
+              ? '🏆 ტურნირის დიდი ფინალი'
+              : match.roundType === 'third_place'
+              ? '🥉 III ადგილისთვის მატჩი'
+              : match.roundType === 'semi_final'
+              ? '1/2 ფინალი'
+              : match.roundType === 'quarter_final'
+              ? '1/4 ფინალი'
+              : match.matchDay ? `ტური ${match.matchDay} • ${match.groupId === 'group-a' ? 'A ჯგუფი' : 'B ჯგუფი'}` : 'ჯგუფური ეტაპი'}
           </span>
 
           {isLive && (

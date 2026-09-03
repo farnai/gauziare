@@ -14,6 +14,7 @@ const notoSansGeorgian = Noto_Sans_Georgian({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://gauziare.ge'),
   title: 'გაუზიარე მომავალს — მინი ფეხბურთის საქველმოქმედო ტურნირი',
   description:
     'შილდაში გამართული ყოველწლიური საქველმოქმედო მინი-ფეხბურთის ტურნირი — LIVE ანგარიშები, მატჩები, ცხრილები, პლეი-ოფი და საქველმოქმედო ინიციატივა ბავშვებისა და მრავალშვილიანი ოჯახების დასახმარებლად.',
@@ -31,9 +32,25 @@ export const metadata: Metadata = {
     title: 'გაუზიარე მომავალს — საქველმოქმედო მინი ფეხბურთის ჩემპიონატი (შილდა)',
     description:
       'გავერთიანდეთ სიკეთისთვის და ერთად დავეხმაროთ ბავშვებს! ❤️ LIVE ანგარიშები და ცხრილები.',
-    type: 'website',
-    locale: 'ka_GE',
+    url: 'https://gauziare.ge',
     siteName: 'გაუზიარე მომავალს',
+    images: [
+      {
+        url: 'https://gauziare.ge/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'გაუზიარე მომავალს — LIVE ანგარიშები',
+      },
+    ],
+    locale: 'ka_GE',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'გაუზიარე მომავალს — საქველმოქმედო მინი ფეხბურთის ჩემპიონატი (შილდა)',
+    description:
+      'გავერთიანდეთ სიკეთისთვის და ერთად დავეხმაროთ ბავშვებს! ❤️ LIVE ანგარიშები და ცხრილები.',
+    images: ['https://gauziare.ge/og-image.jpg'],
   },
 };
 
@@ -52,6 +69,11 @@ export default function RootLayout({
   return (
     <html lang="ka" className={`dark scroll-smooth ${notoSansGeorgian.variable}`}>
       <head>
+        <meta property="og:image" content="https://gauziare.ge/og-image.jpg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:type" content="image/jpeg" />
+        <meta name="twitter:image" content="https://gauziare.ge/og-image.jpg" />
         {/* HTTP → HTTPS redirect */}
         <script
           dangerouslySetInnerHTML={{
