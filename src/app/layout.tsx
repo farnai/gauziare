@@ -15,9 +15,9 @@ const notoSansGeorgian = Noto_Sans_Georgian({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://gauziare.ge'),
-  title: 'გაუზიარე მომავალს — მინი ფეხბურთის საქველმოქმედო ტურნირი',
+  title: 'გაუზიარე მომავალს — საფინალო საღამო (5 სექტემბერი)',
   description:
-    'შილდაში გამართული ყოველწლიური საქველმოქმედო მინი-ფეხბურთის ტურნირი — LIVE ანგარიშები, მატჩები, ცხრილები, პლეი-ოფი და საქველმოქმედო ინიციატივა ბავშვებისა და მრავალშვილიანი ოჯახების დასახმარებლად.',
+    'საქველმოქმედო ტურნირის კულმინაცია! 5 სექტემბერს შილდის სტადიონზე: 20:00 ამხანაგური მატჩი & მაყურებელთა ჩელენჯი, 21:00 დიდი ფინალი: შილდა 🆚 თელავი. LIVE ანგარიშები და განრიგი ❤️⚽️',
   keywords: [
     'გაუზიარე მომავალს',
     'შილდა',
@@ -26,20 +26,22 @@ export const metadata: Metadata = {
     'შილდის სტადიონი',
     'ფეხბურთის ჩემპიონატი',
     'live ანგარიშები',
+    'საფინალო საღამო',
+    'შილდა თელავი ფინალი',
   ],
   authors: [{ name: 'საინიციატივო ჯგუფი გაუზიარე მომავალს' }],
   openGraph: {
-    title: 'გაუზიარე მომავალს — საქველმოქმედო მინი ფეხბურთის ჩემპიონატი (შილდა)',
+    title: '🔥 საფინალო საღამო • 5 სექტემბერი | გაუზიარე მომავალს',
     description:
-      'გავერთიანდეთ სიკეთისთვის და ერთად დავეხმაროთ ბავშვებს! ❤️ LIVE ანგარიშები და ცხრილები.',
+      'საქველმოქმედო ტურნირის კულმინაცია! 5 სექტემბერს შილდის სტადიონზე: 20:00 ამხანაგური მატჩი & მაყურებელთა ჩელენჯი, 21:00 დიდი ფინალი: შილდა 🆚 თელავი. LIVE ანგარიშები და განრიგი ❤️⚽️',
     url: 'https://gauziare.ge',
     siteName: 'გაუზიარე მომავალს',
     images: [
       {
-        url: 'https://gauziare.ge/og-image.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'გაუზიარე მომავალს — LIVE ანგარიშები',
+        url: 'https://gauziare.ge/og-final-night.jpg',
+        width: 1024,
+        height: 537,
+        alt: 'საფინალო საღამო • 5 სექტემბერი — გაუზიარე მომავალს',
       },
     ],
     locale: 'ka_GE',
@@ -47,10 +49,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'გაუზიარე მომავალს — საქველმოქმედო მინი ფეხბურთის ჩემპიონატი (შილდა)',
+    title: '🔥 საფინალო საღამო • 5 სექტემბერი | გაუზიარე მომავალს',
     description:
-      'გავერთიანდეთ სიკეთისთვის და ერთად დავეხმაროთ ბავშვებს! ❤️ LIVE ანგარიშები და ცხრილები.',
-    images: ['https://gauziare.ge/og-image.jpg'],
+      'საქველმოქმედო ტურნირის კულმინაცია! 5 სექტემბერს შილდის სტადიონზე: 20:00 ამხანაგური მატჩი & მაყურებელთა ჩელენჯი, 21:00 დიდი ფინალი: შილდა 🆚 თელავი. LIVE ანგარიშები და განრიგი ❤️⚽️',
+    images: ['https://gauziare.ge/og-final-night.jpg'],
   },
 };
 
@@ -69,11 +71,14 @@ export default function RootLayout({
   return (
     <html lang="ka" className={`dark scroll-smooth ${notoSansGeorgian.variable}`}>
       <head>
-        <meta property="og:image" content="https://gauziare.ge/og-image.jpg" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
+        <meta property="og:title" content="🔥 საფინალო საღამო • 5 სექტემბერი | გაუზიარე მომავალს" />
+        <meta property="og:description" content="საქველმოქმედო ტურნირის კულმინაცია! 5 სექტემბერს შილდის სტადიონზე: 20:00 ამხანაგური მატჩი & მაყურებელთა ჩელენჯი, 21:00 დიდი ფინალი: შილდა 🆚 თელავი. LIVE ანგარიშები და განრიგი ❤️⚽️" />
+        <meta property="og:image" content="https://gauziare.ge/og-final-night.jpg" />
+        <meta property="og:image:secure_url" content="https://gauziare.ge/og-final-night.jpg" />
+        <meta property="og:image:width" content="1024" />
+        <meta property="og:image:height" content="537" />
         <meta property="og:image:type" content="image/jpeg" />
-        <meta name="twitter:image" content="https://gauziare.ge/og-image.jpg" />
+        <meta name="twitter:image" content="https://gauziare.ge/og-final-night.jpg" />
         {/* HTTP → HTTPS redirect */}
         <script
           dangerouslySetInnerHTML={{
