@@ -27,8 +27,9 @@ export default function TournamentTimeline() {
     { name: 'ჯგუფური ეტაპი', active: false, completed: true },
     { name: '1/4 ფინალი', active: false, completed: true },
     { name: '1/2 ფინალი', active: false, completed: true },
-    { name: 'III ადგილი (0:4)', active: false, completed: isThirdPlaceFinished },
-    { name: 'დიდი ფინალი (5 სექტ.)', active: !isFinalFinished, completed: isFinalFinished },
+    { name: 'III ადგილი (0:4)', active: false, completed: true },
+    { name: 'ფინალი (2:4 თელავი 🏆)', active: false, completed: true },
+    { name: 'ოჯახების დახმარება 🤲', active: true, completed: false },
   ];
 
   return (

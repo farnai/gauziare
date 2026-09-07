@@ -644,7 +644,7 @@
       "homeTeamId": "team-shilda-2",
       "awayTeamId": "team-allstars",
       "scheduledAt": "5 სექტემბერი, 20:00",
-      "status": "scheduled",
+      "status": "finished",
       "homeScore": 0,
       "awayScore": 0,
       "matchDay": 5
@@ -657,9 +657,10 @@
       "homeTeamId": "team-shilda",
       "awayTeamId": "team-telavi",
       "scheduledAt": "5 სექტემბერი, 21:00",
-      "status": "scheduled",
-      "homeScore": 0,
-      "awayScore": 0,
+      "status": "finished",
+      "homeScore": 2,
+      "awayScore": 4,
+      "finishedAt": "2026-09-05T22:30:00.000Z",
       "matchDay": 5
     },
     {
@@ -677,5 +678,5 @@
       "matchDay": 1
     }
   ],
-  "lastUpdated": 1788460581359
+  "lastUpdated": 1788796627949
 }

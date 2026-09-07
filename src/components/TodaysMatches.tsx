@@ -8,8 +8,16 @@ import { Clock, Shield, ChevronRight } from 'lucide-react';
 export default function TodaysMatches() {
   const { matches, teamMap } = useTournament();
 
-  // Show only upcoming or live matches (playoff / knockout stage)
+  // Show upcoming or live matches, or if all are finished, show the grand final matches
   const activeOrUpcoming = matches.filter((m) => m.status !== 'finished');
+  const isAllFinished = activeOrUpcoming.length === 0;
+
+  // If all matches finished, display key final matches (final, 3rd place, friendly)
+  const displayMatches = !isAllFinished
+    ? activeOrUpcoming
+    : matches.filter(
+        (m) => m.roundType === 'final' || m.roundType === 'third_place' || m.roundType === 'friendly'
+      );
 
   const getRoundLabel = (m: (typeof matches)[0]) => {
     if (m.roundType === 'quarter_final') {
@@ -21,35 +29,37 @@ export default function TodaysMatches() {
       return `1/2 ფინალი ${sfNum}`;
     }
     if (m.roundType === 'friendly') return '⚽ ამხანაგური მატჩი';
-    if (m.roundType === 'final') return '🏆 დიდი ფინალი';
-    if (m.roundType === 'third_place') return '🥉 III ადგილი';
+    if (m.roundType === 'final') return '🏆 დიდი ფინალი (დასრულდა)';
+    if (m.roundType === 'third_place') return '🥉 III ადგილი (დასრულდა)';
     if (m.groupId === 'group-a') return 'A ჯგუფი';
     if (m.groupId === 'group-b') return 'B ჯგუფი';
     return 'პლეი-ოფი';
   };
 
-  if (activeOrUpcoming.length === 0) return null;
+  if (displayMatches.length === 0) return null;
 
   return (
     <section id="matches-section" className="scroll-mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <div className="flex items-center justify-between mb-6">
         <div>
           <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight flex items-center gap-2.5">
-            <span className="w-3 h-3 rounded-full bg-emerald-500 animate-pulse" />
-            საფინალო საღამოს განრიგი
+            <span className="w-3 h-3 rounded-full bg-amber-400" />
+            {isAllFinished ? 'საფინალო მატჩების ოფიციალური შედეგები' : 'საფინალო საღამოს განრიგი'}
           </h2>
           <p className="text-xs sm:text-sm text-slate-400 mt-0.5">
-            შაბათი, 5 სექტემბერი • საფინალო საღამოს მატჩები შილდის სტადიონზე
+            {isAllFinished
+              ? 'საფინალო დღის მატჩების ანგარიშები • შილდის სტადიონი'
+              : 'შაბათი, 5 სექტემბერი • საფინალო საღამოს მატჩები შილდის სტადიონზე'}
           </p>
         </div>
 
         <span className="text-xs font-semibold text-slate-400 bg-slate-800/80 px-3 py-1 rounded-full border border-slate-700">
-          {activeOrUpcoming.length} მატჩი
+          {displayMatches.length} მატჩი
         </span>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5">
-        {activeOrUpcoming.map((match) => {
+        {displayMatches.map((match) => {
           const home = teamMap.get(match.homeTeamId);
           const away = teamMap.get(match.awayTeamId);
           const isLive = match.status === 'live';

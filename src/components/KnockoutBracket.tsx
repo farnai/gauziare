@@ -70,6 +70,12 @@ export default function KnockoutBracket() {
               >
                 {m.homeTeam?.name || m.homePlaceholder}
               </span>
+              {isFinal && m.winnerTeamId && m.winnerTeamId === m.homeTeam?.id && (
+                <span className="shrink-0 text-[10px] font-black text-amber-300 bg-amber-500/20 px-1.5 py-0.5 rounded border border-amber-500/30 flex items-center gap-1">
+                  <Trophy className="w-3 h-3 text-amber-400" />
+                  ჩემპიონი
+                </span>
+              )}
             </div>
             <div className="flex items-center gap-1.5 shrink-0">
               <span
@@ -106,6 +112,12 @@ export default function KnockoutBracket() {
               >
                 {m.awayTeam?.name || m.awayPlaceholder}
               </span>
+              {isFinal && m.winnerTeamId && m.winnerTeamId === m.awayTeam?.id && (
+                <span className="shrink-0 text-[10px] font-black text-amber-300 bg-amber-500/20 px-1.5 py-0.5 rounded border border-amber-500/30 flex items-center gap-1">
+                  <Trophy className="w-3 h-3 text-amber-400" />
+                  ჩემპიონი
+                </span>
+              )}
             </div>
             <div className="flex items-center gap-1.5 shrink-0">
               <span

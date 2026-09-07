@@ -28,18 +28,18 @@ export default function CharityPage() {
     <div className="py-8">
       {/* Top Header */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-3xl mb-4">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-rose-500/10 border border-rose-500/30 text-xs sm:text-sm font-bold text-rose-400 mb-4">
-          <Heart className="w-4 h-4 fill-rose-500" />
-          <span>სიკეთის ინიციატივა</span>
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-xs sm:text-sm font-bold text-emerald-400 mb-4">
+          <Heart className="w-4 h-4 fill-rose-500 text-rose-500" />
+          <span>შემდეგი და ყველაზე მნიშვნელოვანი ეტაპი</span>
         </div>
 
         <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight mb-4">
-          გავერთიანდეთ სიკეთისთვის და ერთად დავეხმაროთ ბავშვებს! ❤️
+          შეგროვილი თანხების გადანაწილება ოჯახებზე ❤️
         </h1>
 
         <p className="text-slate-300 text-sm sm:text-lg leading-relaxed">
-          ტურნირი „გაუზიარე მომავალს“ შექმნილია იმისათვის, რათა სპორტული აზარტი და ჯანსაღი ცხოვრების წესი
-          გავაერთიანოთ უმთავრეს ფასეულობასთან — <strong>სიკეთესა და ურთიერთთანადგომასთან</strong>.
+          ტურნირი „გაუზიარე მომავალს“ დასრულდა. ახლა იწყება მთავარი მისია — შეგროვილი საქველმოქმედო
+          თანხების მიმართვა <strong>მრავალშვილიანი და სოციალურად გაჭირვებული ოჯახების დასახმარებლად</strong>.
         </p>
       </div>
 
@@ -70,8 +70,8 @@ export default function CharityPage() {
           <ShieldCheck className="w-8 h-8 text-emerald-400 shrink-0" />
           <div className="text-xs sm:text-sm text-slate-300 leading-relaxed">
             <strong className="text-white block font-bold mb-0.5">სრული გამჭვირვალობის გარანტია:</strong>
-            ყველა შემოწირულობა, საწევრო შენატანი და ხარჯთაღრიცხვა ღიად გასაჯაროვდება საინიციატივო ჯგუფის მიერ
-            ტურნირის დასრულებისთანავე.
+            თანხების განაწილების პროცესს და დეტალურ ინფორმაციას ეტაპობრივად იხილავთ ჩვენს გვერდზე.
+            თუ ფიქრობთ, რომ თქვენს ირგვლივ არის ოჯახი, რომელსაც ჩვენი გვერდში დგომა სჭირდება — მოგვწერეთ პირად შეტყობინებაში.
           </div>
         </div>
       </div>

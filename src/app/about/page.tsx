@@ -38,15 +38,18 @@ export default function AboutPage() {
         </h1>
 
         <p className="text-slate-300 text-sm sm:text-lg leading-relaxed mb-6">
-          <strong>22 აგვისტოს, სოფელ შილდის სტადიონზე</strong>, ყოველწლიური საქველმოქმედო
-          მინი-ფეხბურთის ტურნირი აიღებს სტარტს. სამოყვარულო შეჯიბრებას საინიციატივო ჯგუფი{' '}
-          <strong>„გაუზიარე მომავალს“</strong> უძღვება.
+          <strong>სოფელ შილდის სტადიონზე</strong> წარმატებით დასრულდა ყოველწლიური საქველმოქმედო
+          მინი-ფეხბურთის ტურნირი <strong>„გაუზიარე მომავალს“</strong>.
+          უკვე <strong>4 წელია</strong>, შილდელი ახალგაზრდები ტრადიციულად და დიდი ენთუზიაზმით ვაკეთებთ ამ კეთილ საქმეს.
+          წლევანდელ ტურნირში მონაწილეობდა <strong>14 გუნდი</strong> (მათ შორის რამდენიმე ახალი გუნდი).
+          სანახაობრივი ფინალის შემდეგ ჩემპიონის ტიტული მოიპოვა <strong>თელავმა</strong> (2:4),
+          ხოლო ტურნირის საუკეთესო მოთამაშედ დასახელდა შილდის მეკარე — <strong>გიორგი კიკნაძე</strong>! ⭐️
         </p>
 
         <div className="flex flex-wrap items-center justify-center gap-3 text-xs sm:text-sm font-semibold text-slate-300">
           <span className="px-3.5 py-1.5 rounded-xl bg-slate-900 border border-slate-800 flex items-center gap-2">
-            <Calendar className="w-4 h-4 text-emerald-400" />
-            22 აგვისტო
+            <Trophy className="w-4 h-4 text-amber-400" />
+            ჩემპიონი: თელავი 🥇
           </span>
           <span className="px-3.5 py-1.5 rounded-xl bg-slate-900 border border-slate-800 flex items-center gap-2">
             <MapPin className="w-4 h-4 text-emerald-400" />
@@ -54,7 +57,11 @@ export default function AboutPage() {
           </span>
           <span className="px-3.5 py-1.5 rounded-xl bg-slate-900 border border-slate-800 flex items-center gap-2">
             <Users className="w-4 h-4 text-emerald-400" />
-            14 გუნდი
+            14 გუნდი (4 წელი)
+          </span>
+          <span className="px-3.5 py-1.5 rounded-xl bg-slate-900 border border-slate-800 flex items-center gap-2">
+            <Calendar className="w-4 h-4 text-emerald-400" />
+            შემდეგი: 2027 წელი 🏆
           </span>
         </div>
       </div>

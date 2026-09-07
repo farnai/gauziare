@@ -27,7 +27,7 @@ export default function CharitySection() {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-xs sm:text-sm font-bold text-emerald-300 mb-4 shadow-inner">
             <Heart className="w-4 h-4 fill-rose-500 text-rose-500" />
-            <span>საქველმოქმედო მისია</span>
+            <span>🤲 საქველმოქმედო ეტაპი • თანხების განაწილება</span>
           </div>
 
           <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight mb-4">
@@ -35,13 +35,13 @@ export default function CharitySection() {
           </h2>
 
           <p className="text-base sm:text-xl font-bold text-emerald-300 max-w-2xl mx-auto mb-3">
-            გავერთიანდეთ სიკეთისთვის და ერთად დავეხმაროთ ბავშვებს!
+            გავერთიანდეთ სიკეთისთვის და ერთად დავეხმაროთ ოჯახებსა და ბავშვებს!
           </p>
 
           <p className="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto mb-8 leading-relaxed">
-            ნებისმიერი ოდენობის თანხის ჩარიცხვით შეგიძლია მხარი დაუჭირო საქველმოქმედო ინიციატივას.
-            შეგროვებული თანხა მოხმარდება <strong>მრავალშვილიან და სოციალურად დაუცველ ოჯახებს</strong>,
-            რათა ბავშვებს შეუმსუბუქდეთ ყოველდღიურობა და მოემზადონ ახალი სასწავლო წლისთვის.
+            ტურნირი დასრულდა და იწყება ყველაზე საპასუხისმგებლო ეტაპი! შეგროვილ თანხებს, საჭიროებისამებრ,
+            გადავანაწილებთ <strong>მრავალშვილიან და გაჭირვებულ ოჯახებზე</strong>. თანხების განაწილების პროცესს
+            და დეტალურ ინფორმაციას ეტაპობრივად იხილავთ ჩვენს გვერდზე.
           </p>
 
           {/* Donation Purpose Alert */}
@@ -49,10 +49,10 @@ export default function CharitySection() {
             <ShieldCheck className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
             <div>
               <span className="font-extrabold text-white block mb-0.5">
-                გადარიცხვის დანიშნულება:
+                გადარიცხვის დანიშნულება & გამჭვირვალობა:
               </span>
-              მიუთითეთ სასურველი <strong>გუნდის სახელი</strong> ან <strong>„ქველმოქმედება“</strong>.
-              ორგანიზატორები უზრუნველყოფენ ხარჯებისა და დახმარების სრულ, გამჭვირვალე ანგარიშგებას.
+              მიუთითეთ <strong>„ქველმოქმედება“</strong>.
+              ორგანიზატორები უზრუნველყოფენ შეგროვილი თანხების განაწილებისა და დახმარების სრულ, გამჭვირვალე ანგარიშგებას.
             </div>
           </div>
 

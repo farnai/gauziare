@@ -21,21 +21,11 @@ export default function Hero() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center max-w-4xl mx-auto">
           {/* Live / Status Pill */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-800/90 border border-slate-700/80 text-xs sm:text-sm font-semibold mb-6 shadow-inner">
-            {liveMatch ? (
-              <span className="flex items-center gap-2 text-rose-400 font-bold">
-                <span className="relative flex h-2.5 w-2.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-rose-500"></span>
-                </span>
-                LIVE მატჩი მიმდინარეობს
-              </span>
-            ) : (
-              <span className="flex items-center gap-2 text-emerald-400">
-                <span className="h-2 w-2 rounded-full bg-emerald-500"></span>
-                საქველმოქმედო ტურნირი • სოფელი შილდა
-              </span>
-            )}
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-800/90 border border-amber-500/40 text-xs sm:text-sm font-semibold mb-6 shadow-inner">
+            <span className="flex items-center gap-2 text-amber-300 font-bold">
+              <Trophy className="w-4 h-4 text-amber-400" />
+              <span>ტურნირი წარმატებით დასრულდა! • ჩემპიონი: თელავი 🥇</span>
+            </span>
           </div>
 
           {/* Main Title */}
@@ -57,17 +47,18 @@ export default function Hero() {
 
           {/* Subtitle */}
           <p className="text-slate-300 text-sm sm:text-lg max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed">
-            სამოყვარულო მინი-ფეხბურთის ჩემპიონატი მრავალშვილიანი და სოციალურად დაუცველი ოჯახების, ასევე სასკოლოდ ბავშვების მხარდასაჭერად.
+            სამოყვარულო მინი-ფეხბურთის საქველმოქმედო ჩემპიონატი დასრულდა! შეგროვილი თანხები ეტაპობრივად
+            გადაეცემა მრავალშვილიან და გაჭირვებულ ოჯახებს. შევხვდებით 2027 წელს!
           </p>
 
           {/* Action CTAs */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-4 mb-10">
             <Link
-              href="/#live-section"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-2xl bg-gradient-to-r from-rose-600 to-red-700 hover:from-rose-500 hover:to-red-600 text-white font-extrabold text-base shadow-xl shadow-rose-950/60 hover:scale-[1.02] active:scale-[0.98] transition-all"
+              href="/#playoff-section"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-2xl bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-400 hover:to-yellow-500 text-slate-950 font-black text-base shadow-xl shadow-amber-950/60 hover:scale-[1.02] active:scale-[0.98] transition-all"
             >
-              <Flame className="w-5 h-5 fill-white" />
-              <span>🔴 LIVE ანგარიშები</span>
+              <Trophy className="w-5 h-5 text-slate-950" />
+              <span>🏆 საბოლოო შედეგები</span>
             </Link>
 
             <Link
@@ -75,7 +66,7 @@ export default function Hero() {
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-500 hover:to-teal-600 text-white font-extrabold text-base shadow-xl shadow-emerald-950/60 hover:scale-[1.02] active:scale-[0.98] transition-all"
             >
               <Heart className="w-5 h-5 fill-white" />
-              <span>❤️ მხარი დაუჭირე</span>
+              <span>🤲 ოჯახების დახმარება</span>
             </Link>
 
             <Link
@@ -90,12 +81,12 @@ export default function Hero() {
           {/* Tournament Quick Facts Bar */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto pt-4">
             <div className="glass-panel p-3 sm:p-4 rounded-2xl flex items-center gap-3 text-left">
-              <div className="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 shrink-0">
-                <Calendar className="w-5 h-5" />
+              <div className="p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 shrink-0">
+                <Trophy className="w-5 h-5" />
               </div>
               <div>
-                <div className="text-[11px] uppercase tracking-wider text-slate-400 font-semibold">სტარტი</div>
-                <div className="text-sm sm:text-base font-extrabold text-white">22 აგვისტო</div>
+                <div className="text-[11px] uppercase tracking-wider text-slate-400 font-semibold">ჩემპიონი</div>
+                <div className="text-sm sm:text-base font-extrabold text-white">თელავი 🥇</div>
               </div>
             </div>
 
@@ -114,18 +105,18 @@ export default function Hero() {
                 <Users className="w-5 h-5" />
               </div>
               <div>
-                <div className="text-[11px] uppercase tracking-wider text-slate-400 font-semibold">გუნდები</div>
-                <div className="text-sm sm:text-base font-extrabold text-white">{totalTeams} გუნდი (2 ჯგუფი)</div>
+                <div className="text-[11px] uppercase tracking-wider text-slate-400 font-semibold">მონაწილეები</div>
+                <div className="text-sm sm:text-base font-extrabold text-white">14 გუნდი (4 წელი)</div>
               </div>
             </div>
 
             <div className="glass-panel p-3 sm:p-4 rounded-2xl flex items-center gap-3 text-left">
-              <div className="p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 shrink-0">
-                <Trophy className="w-5 h-5" />
+              <div className="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 shrink-0">
+                <Calendar className="w-5 h-5" />
               </div>
               <div>
-                <div className="text-[11px] uppercase tracking-wider text-slate-400 font-semibold">ჩატარებული</div>
-                <div className="text-sm sm:text-base font-extrabold text-white">{finishedCount} მატჩი</div>
+                <div className="text-[11px] uppercase tracking-wider text-slate-400 font-semibold">შემდეგი ტურნირი</div>
+                <div className="text-sm sm:text-base font-extrabold text-white">2027 წელი 🏆</div>
               </div>
             </div>
           </div>

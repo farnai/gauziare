@@ -32,11 +32,12 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-slate-800/80 bg-[#090e17]/95 backdrop-blur-md">
-      {/* Subtle test mode announcement bar */}
-      <div className="w-full bg-slate-950/90 border-b border-slate-800/60 py-1 px-4 text-center">
-        <p className="text-[11px] font-medium text-slate-400 flex items-center justify-center gap-1.5">
-          <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse inline-block" />
-          <span>პლატფორმა მუშაობს სატესტო რეჟიმში</span>
+      {/* Subtle celebratory tournament conclusion bar */}
+      <div className="w-full bg-gradient-to-r from-amber-950/60 via-slate-950 to-emerald-950/60 border-b border-amber-500/30 py-1.5 px-4 text-center">
+        <p className="text-[11px] sm:text-xs font-bold text-amber-300 flex items-center justify-center gap-2">
+          <span>🏆 ტურნირი დასრულდა! • ჩემპიონია თელავი 🥇</span>
+          <span className="hidden sm:inline text-slate-400">•</span>
+          <span className="hidden sm:inline text-emerald-300">შევხვდებით 2027 წელს! ❤️</span>
         </p>
       </div>
 
@@ -55,8 +56,8 @@ export default function Navbar() {
                 <span className="text-[11px] font-medium text-emerald-400/90 tracking-wide uppercase">
                   შილდის ტურნირი
                 </span>
-                <span className="hidden sm:inline-flex px-1.5 py-0.2 rounded bg-amber-500/10 border border-amber-500/30 text-[9px] text-amber-300 font-medium">
-                  სატესტო რეჟიმი
+                <span className="hidden sm:inline-flex px-1.5 py-0.2 rounded bg-emerald-500/10 border border-emerald-500/30 text-[9px] text-emerald-300 font-bold">
+                  2026 შედეგები 🏆
                 </span>
               </div>
             </div>

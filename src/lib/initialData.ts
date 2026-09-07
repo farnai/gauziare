@@ -8,7 +8,7 @@ export const INITIAL_TOURNAMENT: Tournament = {
   description: 'სამოყვარულო მინი-ფეხბურთის საქველმოქმედო ტურნირი',
   startDate: '2026-08-22',
   endDate: '2026-08-25',
-  status: 'active',
+  status: 'completed',
   pointsForWin: 3,
   pointsForDraw: 1,
   pointsForLoss: 0,
@@ -688,7 +688,7 @@ export const INITIAL_MATCHES: Match[] = [
     "homeTeamId": "team-shilda-2",
     "awayTeamId": "team-allstars",
     "scheduledAt": "5 სექტემბერი, 20:00",
-    "status": "scheduled",
+    "status": "finished",
     "homeScore": 0,
     "awayScore": 0,
     "matchDay": 5
@@ -701,9 +701,10 @@ export const INITIAL_MATCHES: Match[] = [
     "homeTeamId": "team-shilda",
     "awayTeamId": "team-telavi",
     "scheduledAt": "5 სექტემბერი, 21:00",
-    "status": "scheduled",
-    "homeScore": 0,
-    "awayScore": 0,
+    "status": "finished",
+    "homeScore": 2,
+    "awayScore": 4,
+    "finishedAt": "2026-09-05T22:30:00.000Z",
     "matchDay": 5
   },
   {
