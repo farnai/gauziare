@@ -27,7 +27,7 @@ async function deploy() {
     }
 
     // 2. OpenGraph images
-    for (const og of ['og-image.jpg', 'og-image.png', 'og-final-night.jpg']) {
+    for (const og of ['og-image.jpg', 'og-image.png', 'og-final-night.jpg', 'og-champions.jpg']) {
       const p = path.join(__dirname, 'public', og);
       if (fs.existsSync(p)) {
         await client.uploadFrom(p, `/${og}`);

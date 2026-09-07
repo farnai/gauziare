@@ -39,10 +39,10 @@ export const metadata: Metadata = {
     siteName: 'გაუზიარე მომავალს',
     images: [
       {
-        url: 'https://gauziare.ge/og-final-night.jpg',
-        width: 1024,
-        height: 537,
-        alt: 'ტურნირი დასრულდა — ჩემპიონია თელავი 🏆',
+        url: 'https://gauziare.ge/og-champions.jpg',
+        width: 1200,
+        height: 675,
+        alt: 'ტურნირი დასრულდა — ჩემპიონია თელავი 🏆 | გაუზიარე მომავალს',
       },
     ],
     locale: 'ka_GE',
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     title: '🏆 ტურნირი დასრულდა! ჩემპიონი: თელავი 🥇 | გაუზიარე მომავალს',
     description:
       'დასრულდა საქველმოქმედო ტურნირი მინი ფეხბურთში! I ადგილი — თელავი 🥇, II ადგილი — შილდა 🥈, III ადგილი — კალაური 🥉. ტურნირის საუკეთესო მოთამაშე: გიორგი კიკნაძე. შევხვდებით 2027 წელს! ❤️⚽️',
-    images: ['https://gauziare.ge/og-final-night.jpg'],
+    images: ['https://gauziare.ge/og-champions.jpg'],
   },
 };
 
@@ -74,12 +74,12 @@ export default function RootLayout({
       <head>
         <meta property="og:title" content="🏆 ტურნირი დასრულდა! ჩემპიონი: თელავი 🥇 | გაუზიარე მომავალს" />
         <meta property="og:description" content="დასრულდა საქველმოქმედო ტურნირი მინი ფეხბურთში! I ადგილი — თელავი 🥇, II ადგილი — შილდა 🥈, III ადგილი — კალაური 🥉. ტურნირის საუკეთესო მოთამაშე: გიორგი კიკნაძე. შევხვდებით 2027 წელს! ❤️⚽️" />
-        <meta property="og:image" content="https://gauziare.ge/og-final-night.jpg" />
-        <meta property="og:image:secure_url" content="https://gauziare.ge/og-final-night.jpg" />
-        <meta property="og:image:width" content="1024" />
-        <meta property="og:image:height" content="537" />
+        <meta property="og:image" content="https://gauziare.ge/og-champions.jpg" />
+        <meta property="og:image:secure_url" content="https://gauziare.ge/og-champions.jpg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="675" />
         <meta property="og:image:type" content="image/jpeg" />
-        <meta name="twitter:image" content="https://gauziare.ge/og-final-night.jpg" />
+        <meta name="twitter:image" content="https://gauziare.ge/og-champions.jpg" />
         {/* HTTP → HTTPS redirect */}
         <script
           dangerouslySetInnerHTML={{
