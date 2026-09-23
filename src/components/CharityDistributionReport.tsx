@@ -270,7 +270,7 @@ export default function CharityDistributionReport() {
                 </a>
 
                 <a
-                  href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fgauziare.ge%2F"
+                  href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fgauziare.ge%2F%3Fv%3Dcharity-report-2026"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-extrabold shadow-md transition-all"

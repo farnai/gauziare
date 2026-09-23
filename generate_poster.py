@@ -168,10 +168,12 @@ def create_poster():
     final_rgb = final_img.convert("RGB")
     
     output_files = [
+        os.path.join("public", "og-charity-report-2026.jpg"),
         os.path.join("public", "og-charity.jpg"),
         os.path.join("public", "og-image.jpg"),
         os.path.join("public", "og-champions.jpg"),
         os.path.join("public", "og-final-night.jpg"),
+        os.path.join("out", "og-charity-report-2026.jpg"),
         os.path.join("out", "og-charity.jpg"),
         os.path.join("out", "og-image.jpg"),
         os.path.join("out", "og-champions.jpg"),

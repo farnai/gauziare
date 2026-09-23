@@ -15,9 +15,9 @@ const notoSansGeorgian = Noto_Sans_Georgian({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://gauziare.ge'),
-  title: 'გაუზიარე მომავალს — ტურნირი დასრულდა! ჩემპიონი: თელავი 🏆',
+  title: '❤️ დაპირებისამებრ — 4 600 ლარი სრულად გადანაწილდა! | გაუზიარე მომავალს',
   description:
-    'დასრულდა საქველმოქმედო ტურნირი მინი ფეხბურთში! I ადგილი — თელავი 🥇, II ადგილი — შილდა 🥈, III ადგილი — კალაური 🥉. ტურნირის საუკეთესო მოთამაშე: გიორგი კიკნაძე. შევხვდებით 2027 წელს! ❤️⚽️',
+    'საინიციატივო ჯგუფის „გაუზიარე მომავალს“ ორგანიზებით გამართულ საქველმოქმედო ტურნირზე შეგროვილი 4 600 ლარი სრულად გადანაწილდა: 3 000 ლარი 6 წლის მარიამ მამულაშვილის რეაბილიტაციას, 1 600 ლარი — 4 მრავალშვილიან ოჯახს (400-400 ₾). მადლობა თითოეულ თქვენგანს! ❤️🤝',
   keywords: [
     'გაუზიარე მომავალს',
     'შილდა',
@@ -27,8 +27,8 @@ export const metadata: Metadata = {
     'შილდის სტადიონი',
     'ფეხბურთის ჩემპიონატი',
     'შედეგები',
-    'გიორგი კიკნაძე',
-    'შილდა თელავი ფინალი',
+    'მარიამ მამულაშვილი',
+    'ქველმოქმედების ანგარიში',
   ],
   authors: [{ name: 'საინიციატივო ჯგუფი გაუზიარე მომავალს' }],
   openGraph: {
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     siteName: 'გაუზიარე მომავალს',
     images: [
       {
-        url: 'https://gauziare.ge/og-charity.jpg',
+        url: 'https://gauziare.ge/og-charity-report-2026.jpg',
         width: 1200,
         height: 675,
         alt: 'დაპირებისამებრ — 4 600 ლარი სრულად გადანაწილდა! | გაუზიარე მომავალს',
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     title: '❤️ დაპირებისამებრ — 4 600 ლარი სრულად გადანაწილდა! | გაუზიარე მომავალს',
     description:
       'საინიციატივო ჯგუფის „გაუზიარე მომავალს“ ორგანიზებით გამართულ საქველმოქმედო ტურნირზე შეგროვილი 4 600 ლარი სრულად გადანაწილდა: 3 000 ლარი 6 წლის მარიამ მამულაშვილის რეაბილიტაციას, 1 600 ლარი — 4 მრავალშვილიან ოჯახს. მადლობა ყველას! ❤️',
-    images: ['https://gauziare.ge/og-charity.jpg'],
+    images: ['https://gauziare.ge/og-charity-report-2026.jpg'],
   },
 };
 
@@ -74,12 +74,13 @@ export default function RootLayout({
       <head>
         <meta property="og:title" content="❤️ დაპირებისამებრ — 4 600 ლარი სრულად გადანაწილდა! | გაუზიარე მომავალს" />
         <meta property="og:description" content="საინიციატივო ჯგუფის „გაუზიარე მომავალს“ ორგანიზებით გამართულ საქველმოქმედო ტურნირზე შეგროვილი 4 600 ლარი სრულად გადანაწილდა: 3 000 ლარი 6 წლის მარიამ მამულაშვილის რეაბილიტაციას, 1 600 ლარი — 4 მრავალშვილიან ოჯახს (400-400 ₾). მადლობა თითოეულ თქვენგანს! ❤️🤝" />
-        <meta property="og:image" content="https://gauziare.ge/og-charity.jpg" />
-        <meta property="og:image:secure_url" content="https://gauziare.ge/og-charity.jpg" />
+        <meta property="og:image" content="https://gauziare.ge/og-charity-report-2026.jpg" />
+        <meta property="og:image:secure_url" content="https://gauziare.ge/og-charity-report-2026.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="675" />
         <meta property="og:image:type" content="image/jpeg" />
-        <meta name="twitter:image" content="https://gauziare.ge/og-charity.jpg" />
+        <meta property="og:updated_time" content="2026-09-23T23:55:00Z" />
+        <meta name="twitter:image" content="https://gauziare.ge/og-charity-report-2026.jpg" />
         {/* HTTP → HTTPS redirect */}
         <script
           dangerouslySetInnerHTML={{
