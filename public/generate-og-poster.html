@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+  <meta charset="UTF-8">
+  <title>Facebook Share Poster - Gauziare Momavals</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@500;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      width: 1200px;
+      height: 675px;
+      overflow: hidden;
+      font-family: 'Noto Sans Georgian', -apple-system, BlinkMacSystemFont, sans-serif;
+      position: relative;
+      background: #090e17;
+      color: #fff;
+    }
+    .poster-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1200px;
+      height: 675px;
+      object-fit: cover;
+      filter: brightness(0.65) saturate(1.2);
+    }
+    .poster-overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center 40%, rgba(9, 14, 23, 0.4) 0%, rgba(9, 14, 23, 0.85) 75%, rgba(6, 10, 16, 0.98) 100%),
+                  linear-gradient(to bottom, rgba(5, 20, 15, 0.8) 0%, rgba(9, 14, 23, 0.4) 50%, rgba(5, 10, 15, 0.95) 100%);
+    }
+    .poster-content {
+      position: relative;
+      z-index: 10;
+      width: 1200px;
+      height: 675px;
+      padding: 36px 50px 32px 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      text-align: center;
+    }
+    .top-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 24px;
+      border-radius: 9999px;
+      background: rgba(16, 185, 129, 0.2);
+      border: 1.5px solid rgba(16, 185, 129, 0.6);
+      color: #6ee7b7;
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(8px);
+    }
+    .heart-icon {
+      color: #f43f5e;
+    }
+    .main-title-wrap {
+      margin-top: 10px;
+    }
+    .main-subtitle {
+      font-size: 20px;
+      font-weight: 800;
+      color: #fbbf24;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+    }
+    .main-title {
+      font-size: 46px;
+      font-weight: 900;
+      line-height: 1.15;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #ffffff 20%, #fef08a 60%, #f59e0b 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 4px 30px rgba(0, 0, 0, 0.7);
+    }
+    .cards-row {
+      display: grid;
+      grid-template-columns: 1.25fr 1fr;
+      gap: 24px;
+      width: 100%;
+      max-width: 1100px;
+      margin: 16px 0;
+    }
+    .card {
+      background: rgba(15, 23, 42, 0.78);
+      border-radius: 24px;
+      padding: 22px 28px;
+      text-align: left;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+    .card-mariam {
+      border: 2px solid rgba(244, 63, 94, 0.55);
+      background: linear-gradient(135deg, rgba(244, 63, 94, 0.12) 0%, rgba(15, 23, 42, 0.85) 100%);
+    }
+    .card-families {
+      border: 2px solid rgba(6, 182, 212, 0.55);
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.12) 0%, rgba(15, 23, 42, 0.85) 100%);
+    }
+    .card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .card-tag {
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .card-mariam .card-tag {
+      color: #fda4af;
+    }
+    .card-families .card-tag {
+      color: #67e8f9;
+    }
+    .card-amount {
+      font-size: 28px;
+      font-weight: 900;
+      font-family: monospace;
+      padding: 4px 14px;
+      border-radius: 12px;
+      letter-spacing: -0.5px;
+    }
+    .card-mariam .card-amount {
+      background: rgba(244, 63, 94, 0.25);
+      border: 1px solid rgba(244, 63, 94, 0.5);
+      color: #ffe4e6;
+    }
+    .card-families .card-amount {
+      background: rgba(6, 182, 212, 0.25);
+      border: 1px solid rgba(6, 182, 212, 0.5);
+      color: #cffafe;
+    }
+    .card-title {
+      font-size: 21px;
+      font-weight: 900;
+      color: #ffffff;
+      margin-bottom: 6px;
+      line-height: 1.2;
+    }
+    .card-desc {
+      font-size: 14px;
+      font-weight: 600;
+      color: #cbd5e1;
+      line-height: 1.45;
+    }
+    .card-desc strong {
+      color: #f8fafc;
+    }
+    .family-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .family-pill {
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #e2e8f0;
+    }
+    .bottom-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 1100px;
+      padding: 12px 24px;
+      border-radius: 18px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1.5px solid rgba(251, 191, 36, 0.45);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+    }
+    .bottom-gratitude {
+      font-size: 15px;
+      font-weight: 800;
+      color: #f1f5f9;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .bottom-promise {
+      font-size: 15px;
+      font-weight: 900;
+      color: #fbbf24;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .bottom-url {
+      font-size: 14px;
+      font-weight: 800;
+      color: #34d399;
+      background: rgba(16, 185, 129, 0.15);
+      padding: 4px 12px;
+      border-radius: 8px;
+      border: 1px solid rgba(16, 185, 129, 0.35);
+    }
+  </style>
+</head>
+<body>
+  <img class="poster-bg" src="og-bg.jpg" alt="Background">
+  <div class="poster-overlay"></div>
+
+  <div class="poster-content">
+    <!-- Top Badge -->
+    <div class="top-badge">
+      <span>⚽</span>
+      <span>საინიციატივო ჯგუფი • გაუზიარე მომავალს</span>
+      <span class="heart-icon">❤️</span>
+    </div>
+
+    <!-- Main Title -->
+    <div class="main-title-wrap">
+      <div class="main-subtitle">ოფიციალური ანგარიში • სრული გამჭვირვალობა</div>
+      <h1 class="main-title">დაპირებისამებრ — 4 600 ₾ სრულად გადანაწილდა!</h1>
+    </div>
+
+    <!-- Cards Row -->
+    <div class="cards-row">
+      <!-- Mariam Mamulashvili Card -->
+      <div class="card card-mariam">
+        <div>
+          <div class="card-top">
+            <span class="card-tag">მთავარი დახმარება • 6 წლის მარიამი</span>
+            <span class="card-amount">3 000 ₾</span>
+          </div>
+          <div class="card-title">მარიამ მამულაშვილის რეაბილიტაცია ❤️</div>
+          <div class="card-desc">
+            დიაგნოზი: <strong>აუტოიმუნური ენცეფალიტი</strong>. თანხა სრულად მოხმარდება აუცილებელ სარეაბილიტაციო კურსს. მარიამს ვუსურვებთ მალე გამოჯანმრთელებას!
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 Families Card -->
+      <div class="card card-families">
+        <div>
+          <div class="card-top">
+            <span class="card-tag">თანადგომა • 4 მრავალშვილიანი ოჯახი</span>
+            <span class="card-amount">1 600 ₾</span>
+          </div>
+          <div class="card-title">თანაბრად 400-400 ₾ გადანაწილდა:</div>
+          <div class="family-tags">
+            <span class="family-pill">🔹 ბეგაშვილები</span>
+            <span class="family-pill">🔹 ხუციშვილები</span>
+            <span class="family-pill">🔹 მამადაშვილები</span>
+            <span class="family-pill">🔹 კიკოლაშვილ-ფერიაშვილები</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="bottom-bar">
+      <div class="bottom-gratitude">
+        <span>მადლობა თითოეულ თქვენგანს თანადგომისთვის!</span>
+        <span class="heart-icon">❤️🤝</span>
+      </div>
+      <div class="bottom-promise">
+        <span>⚽️ შევხვდებით მომდევნო წელს!</span>
+      </div>
+      <div class="bottom-url">
+        gauziare.ge
+      </div>
+    </div>
+  </div>
+</body>
+</html>

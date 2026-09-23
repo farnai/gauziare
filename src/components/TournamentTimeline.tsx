@@ -29,7 +29,7 @@ export default function TournamentTimeline() {
     { name: '1/2 ფინალი', active: false, completed: true },
     { name: 'III ადგილი (0:4)', active: false, completed: true },
     { name: 'ფინალი (2:4 თელავი 🏆)', active: false, completed: true },
-    { name: 'ოჯახების დახმარება 🤲', active: true, completed: false },
+    { name: 'თანხების გადანაწილება (4,600 ₾) ✅', active: false, completed: true },
   ];
 
   return (

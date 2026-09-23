@@ -226,43 +226,43 @@ export default function FinalNightBanner() {
               </div>
             </div>
 
-            {/* Right: Next & Most Important Humanitarian Stage */}
+            {/* Right: Completed Humanitarian Stage */}
             <div className="rounded-2xl bg-gradient-to-b from-emerald-950/40 via-slate-900/90 to-slate-950 border-2 border-emerald-500/50 p-5 sm:p-6 flex flex-col justify-between shadow-xl">
               <div>
                 <div className="flex items-center gap-2 mb-3 pb-2.5 border-b border-emerald-500/30">
                   <span className="text-lg">🤲</span>
                   <h4 className="font-extrabold text-base text-emerald-300">
-                    შემდეგი და ყველაზე მნიშვნელოვანი ეტაპი!
+                    თანხები სრულად გადანაწილდა! • 4 600 ₾ ❤️
                   </h4>
                 </div>
 
                 <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 mb-3 text-xs text-emerald-200 leading-relaxed">
-                  ტურნირის ფარგლებში შეგროვილ თანხებს, საჭიროებისამებრ, <strong>გადავანაწილებთ მრავალშვილიან და გაჭირვებულ ოჯახებზე!</strong>
+                  დაპირებისამებრ, ტურნირზე შეგროვილი <strong>4 600 ლარი</strong> სრულად გადანაწილდა საჭიროებისამებრ, მათთვის, ვისაც ეს ყველაზე მეტად სჭირდებოდა!
                 </div>
 
-                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                  💰 თანხების განაწილების პროცესს და დეტალურ ინფორმაციას ეტაპობრივად იხილავთ ჩვენს შემდეგ პოსტებში.
+                <div className="space-y-2 text-xs sm:text-sm text-slate-300">
+                  <div className="flex items-center justify-between p-2.5 rounded-xl bg-slate-800/80 border border-slate-700/80">
+                    <span className="font-bold text-white">👧 მარიამ მამულაშვილი (6 წლის):</span>
+                    <span className="font-mono font-black text-rose-400">3 000 ₾</span>
+                  </div>
+                  <div className="flex items-center justify-between p-2.5 rounded-xl bg-slate-800/80 border border-slate-700/80">
+                    <span className="font-bold text-white">👨‍👩‍👧‍👦 4 მრავალშვილიანი ოჯახი:</span>
+                    <span className="font-mono font-black text-cyan-400">1 600 ₾ (4×400)</span>
+                  </div>
+                </div>
+
+                <p className="text-xs text-slate-400 mt-3 leading-relaxed">
+                  ერთად, თითოეული ჩვენგანის მცირე დახმარებით, შეგვიძლია დიდი სიკეთის გაკეთება. 🤝❤️
                 </p>
-
-                <div className="mt-3.5 p-3.5 rounded-xl bg-slate-800/80 border border-slate-700/80">
-                  <p className="text-xs sm:text-sm font-bold text-white leading-relaxed">
-                    თუ ფიქრობთ, რომ თქვენს ირგვლივ არის ოჯახი, რომელსაც ჩვენი გვერდში დგომა და დახმარება სჭირდება, გთხოვთ, <strong>მოგვწეროთ პირად შეტყობინებაში 📩</strong>
-                  </p>
-                  <p className="text-xs text-slate-300 mt-1">
-                    ერთად განვიხილავთ თითოეულ შემთხვევას და შესაძლებლობის ფარგლებში ვეცდებით დახმარებას. ❤️🤝
-                  </p>
-                </div>
               </div>
 
               <div className="mt-4 pt-3 border-t border-slate-800 flex flex-wrap items-center justify-between gap-2">
                 <a
-                  href={FACEBOOK_PAGE_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs shadow-md transition-all"
+                  href="#charity-report"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-md transition-all"
                 >
-                  <MessageCircle className="w-3.5 h-3.5" />
-                  <span>მოგვწერეთ პირადში (Facebook)</span>
+                  <Heart className="w-3.5 h-3.5 fill-white" />
+                  <span>სრული ანგარიშის ნახვა</span>
                 </a>
 
                 <Link

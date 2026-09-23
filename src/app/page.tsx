@@ -6,7 +6,7 @@ import TodaysMatches from '@/components/TodaysMatches';
 import RecentResults from '@/components/RecentResults';
 import StandingsTable from '@/components/StandingsTable';
 import KnockoutBracket from '@/components/KnockoutBracket';
-import CharitySection from '@/components/CharitySection';
+import CharityDistributionReport from '@/components/CharityDistributionReport';
 import PrizeFundSection from '@/components/PrizeFundSection';
 import PartnersSection from '@/components/PartnersSection';
 import ParticipationCTA from '@/components/ParticipationCTA';
@@ -24,25 +24,25 @@ export default function HomePage() {
       {/* 3. Final Night Grand Announcement & Schedule */}
       <FinalNightBanner />
 
-      {/* 3. Tournament Progress Timeline */}
+      {/* 4. Tournament Progress Timeline */}
       <TournamentTimeline />
 
-      {/* 4. Today's Matches */}
+      {/* 5. Official Charity Funds Distribution Report (4 600 ₾) */}
+      <CharityDistributionReport />
+
+      {/* 6. Today's Matches */}
       <TodaysMatches />
 
-      {/* 5. Recent Match Results */}
+      {/* 7. Recent Match Results */}
       <RecentResults />
 
-      {/* 6. Knockout Playoff Bracket */}
+      {/* 8. Knockout Playoff Bracket */}
       <KnockoutBracket />
 
-      {/* 7. Group Standings Tables */}
+      {/* 9. Group Standings Tables */}
       <StandingsTable />
 
-      {/* 8. Charity & Donation Section */}
-      <CharitySection />
-
-      {/* 9. Prize Fund */}
+      {/* 10. Prize Fund */}
       <PrizeFundSection />
 
       {/* 10. Tournament Partner */}

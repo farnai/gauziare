@@ -32,17 +32,17 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: 'საინიციატივო ჯგუფი გაუზიარე მომავალს' }],
   openGraph: {
-    title: '🏆 ტურნირი დასრულდა! ჩემპიონი: თელავი 🥇 | გაუზიარე მომავალს',
+    title: '❤️ დაპირებისამებრ — 4 600 ლარი სრულად გადანაწილდა! | გაუზიარე მომავალს',
     description:
-      'დასრულდა საქველმოქმედო ტურნირი მინი ფეხბურთში! I ადგილი — თელავი 🥇, II ადგილი — შილდა 🥈, III ადგილი — კალაური 🥉. ტურნირის საუკეთესო მოთამაშე: გიორგი კიკნაძე. შევხვდებით 2027 წელს! ❤️⚽️',
+      'საინიციატივო ჯგუფის „გაუზიარე მომავალს“ ორგანიზებით გამართულ საქველმოქმედო ტურნირზე შეგროვილი 4 600 ლარი სრულად გადანაწილდა: 3 000 ლარი 6 წლის მარიამ მამულაშვილის რეაბილიტაციას, 1 600 ლარი — 4 მრავალშვილიან ოჯახს (400-400 ₾). მადლობა თითოეულ თქვენგანს! ❤️🤝',
     url: 'https://gauziare.ge',
     siteName: 'გაუზიარე მომავალს',
     images: [
       {
-        url: 'https://gauziare.ge/og-champions.jpg',
+        url: 'https://gauziare.ge/og-charity.jpg',
         width: 1200,
         height: 675,
-        alt: 'ტურნირი დასრულდა — ჩემპიონია თელავი 🏆 | გაუზიარე მომავალს',
+        alt: 'დაპირებისამებრ — 4 600 ლარი სრულად გადანაწილდა! | გაუზიარე მომავალს',
       },
     ],
     locale: 'ka_GE',
@@ -50,10 +50,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: '🏆 ტურნირი დასრულდა! ჩემპიონი: თელავი 🥇 | გაუზიარე მომავალს',
+    title: '❤️ დაპირებისამებრ — 4 600 ლარი სრულად გადანაწილდა! | გაუზიარე მომავალს',
     description:
-      'დასრულდა საქველმოქმედო ტურნირი მინი ფეხბურთში! I ადგილი — თელავი 🥇, II ადგილი — შილდა 🥈, III ადგილი — კალაური 🥉. ტურნირის საუკეთესო მოთამაშე: გიორგი კიკნაძე. შევხვდებით 2027 წელს! ❤️⚽️',
-    images: ['https://gauziare.ge/og-champions.jpg'],
+      'საინიციატივო ჯგუფის „გაუზიარე მომავალს“ ორგანიზებით გამართულ საქველმოქმედო ტურნირზე შეგროვილი 4 600 ლარი სრულად გადანაწილდა: 3 000 ლარი 6 წლის მარიამ მამულაშვილის რეაბილიტაციას, 1 600 ლარი — 4 მრავალშვილიან ოჯახს. მადლობა ყველას! ❤️',
+    images: ['https://gauziare.ge/og-charity.jpg'],
   },
 };
 
@@ -72,14 +72,14 @@ export default function RootLayout({
   return (
     <html lang="ka" className={`dark scroll-smooth ${notoSansGeorgian.variable}`}>
       <head>
-        <meta property="og:title" content="🏆 ტურნირი დასრულდა! ჩემპიონი: თელავი 🥇 | გაუზიარე მომავალს" />
-        <meta property="og:description" content="დასრულდა საქველმოქმედო ტურნირი მინი ფეხბურთში! I ადგილი — თელავი 🥇, II ადგილი — შილდა 🥈, III ადგილი — კალაური 🥉. ტურნირის საუკეთესო მოთამაშე: გიორგი კიკნაძე. შევხვდებით 2027 წელს! ❤️⚽️" />
-        <meta property="og:image" content="https://gauziare.ge/og-champions.jpg" />
-        <meta property="og:image:secure_url" content="https://gauziare.ge/og-champions.jpg" />
+        <meta property="og:title" content="❤️ დაპირებისამებრ — 4 600 ლარი სრულად გადანაწილდა! | გაუზიარე მომავალს" />
+        <meta property="og:description" content="საინიციატივო ჯგუფის „გაუზიარე მომავალს“ ორგანიზებით გამართულ საქველმოქმედო ტურნირზე შეგროვილი 4 600 ლარი სრულად გადანაწილდა: 3 000 ლარი 6 წლის მარიამ მამულაშვილის რეაბილიტაციას, 1 600 ლარი — 4 მრავალშვილიან ოჯახს (400-400 ₾). მადლობა თითოეულ თქვენგანს! ❤️🤝" />
+        <meta property="og:image" content="https://gauziare.ge/og-charity.jpg" />
+        <meta property="og:image:secure_url" content="https://gauziare.ge/og-charity.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="675" />
         <meta property="og:image:type" content="image/jpeg" />
-        <meta name="twitter:image" content="https://gauziare.ge/og-champions.jpg" />
+        <meta name="twitter:image" content="https://gauziare.ge/og-charity.jpg" />
         {/* HTTP → HTTPS redirect */}
         <script
           dangerouslySetInnerHTML={{
